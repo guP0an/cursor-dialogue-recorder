@@ -1,0 +1,24 @@
+{
+  "name": "cursor-dialogue-recorder",
+  "version": "1.0.0",
+  "description": "自动记录Cursor中AI对话的网站",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+    "test:data": "node scripts/add-test-data.js",
+    "setup:env": "node scripts/create-env.js"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
