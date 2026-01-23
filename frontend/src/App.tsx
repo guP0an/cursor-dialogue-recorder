@@ -22,7 +22,7 @@ function App() {
     <Router>
       <div className="app">
         <ResizableSidebar
-          defaultWidth={280}
+          defaultWidth={200}
           minWidth={200}
           maxWidth={400}
           collapsedWidth={60}
@@ -31,7 +31,7 @@ function App() {
         >
           <div className="app-sidebar">
             <div className="sidebar-header">
-              <h1>Cursor 对话记录器</h1>
+              <h1>Ai 对话记录器</h1>
             </div>
             <nav className="sidebar-nav">
               <NavLink to="/">

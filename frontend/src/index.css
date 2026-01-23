@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&family=Didact+Gothic&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -5,33 +7,54 @@
 }
 
 :root {
-  --parchment-bg: #f4f1e8;
-  --parchment-light: #faf8f3;
-  --parchment-dark: #e8e4d8;
-  --text-primary: #2c2416;
-  --text-secondary: #5a4e3c;
-  --text-tertiary: #8b7d6b;
-  --border-color: #d4c9b8;
-  --accent: #8b6914;
-  --accent-hover: #6b5010;
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+  /* Elegant NFT Art Gallery - Exaggerated Minimalism Color Palette */
+  --bg-primary: #FAFAFA;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #F5F5F5;
+  --text-primary: #09090B;
+  --text-secondary: #18181B;
+  --text-tertiary: #3F3F46;
+  --border-color: rgba(24, 24, 27, 0.1);
+  
+  /* Canvas Neutral + Creative Pink */
+  --accent: #18181B;
+  --accent-hover: #3F3F46;
+  --accent-secondary: #3F3F46;
+  --accent-cta: #EC4899;
+  --accent-cta-hover: #F472B6;
+  --accent-success: #10B981;
+  --accent-warning: #F59E0B;
+  --accent-danger: #EF4444;
+  
+  /* Exaggerated Minimalism Effects - Bold, High Contrast */
+  --minimal-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.1);
+  --minimal-shadow-hover: 
+    0 4px 6px rgba(0, 0, 0, 0.07),
+    0 2px 4px rgba(0, 0, 0, 0.06);
+  --minimal-shadow-cta: 
+    0 4px 12px rgba(236, 72, 153, 0.15),
+    0 2px 4px rgba(236, 72, 153, 0.1);
+  --minimal-shadow-cta-hover: 
+    0 8px 16px rgba(236, 72, 153, 0.2),
+    0 4px 8px rgba(236, 72, 153, 0.15);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
 body {
-  font-family: 'Georgia', 'Times New Roman', 'Palatino', 'Book Antiqua', serif;
+  font-family: 'Didact Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--parchment-bg);
-  background-image: 
-    linear-gradient(90deg, rgba(139, 105, 20, 0.03) 50%, transparent 50%),
-    linear-gradient(rgba(139, 105, 20, 0.03) 50%, transparent 50%);
-  background-size: 20px 20px;
-  background-position: 0 0, 0 0;
+  background: var(--bg-primary);
+  background-attachment: fixed;
   color: var(--text-primary);
-  line-height: 1.7;
+  line-height: 1.8;
   position: relative;
+  min-height: 100vh;
+  letter-spacing: 0.01em;
 }
 
 body::before {
@@ -42,17 +65,20 @@ body::before {
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 20% 50%, rgba(139, 105, 20, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(139, 105, 20, 0.05) 0%, transparent 50%),
-    linear-gradient(180deg, rgba(244, 241, 232, 0.8) 0%, rgba(232, 228, 216, 0.9) 100%);
+    radial-gradient(circle at 20% 30%, rgba(236, 72, 153, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(24, 24, 27, 0.02) 0%, transparent 50%);
   pointer-events: none;
   z-index: 0;
 }
 
 code {
-  font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
+  font-family: 'SF Mono', 'Monaco', 'Consolas', 'Courier New', monospace;
   font-size: 0.9em;
-  background: rgba(139, 105, 20, 0.1);
-  padding: 0.15em 0.4em;
-  border-radius: 3px;
+  background: var(--bg-tertiary);
+  padding: 0.25em 0.6em;
+  border-radius: 4px;
+  color: var(--accent);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  font-weight: 400;
 }

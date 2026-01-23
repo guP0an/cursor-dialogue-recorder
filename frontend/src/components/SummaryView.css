@@ -37,7 +37,6 @@
   font-size: 1.25rem;
   font-weight: 400;
   color: var(--text-primary);
-  font-style: italic;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -52,7 +51,7 @@
   font-size: 1.5rem;
   display: block;
   text-align: center;
-  margin-top: 0.5rem;
+  margin-top: 2.5rem;
 }
 
 .summary-date-nav {
@@ -63,20 +62,23 @@
 
 .date-item {
   width: 100%;
-  padding: 0.875rem 1rem;
-  background: var(--parchment-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  background: transparent;
+  border: none;
+  border-left: 2px solid transparent;
+  border-radius: 0;
   text-align: left;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   font-family: inherit;
   font-size: 0.95rem;
   color: var(--text-secondary);
   font-weight: 400;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
+  box-shadow: none;
+  letter-spacing: 0.02em;
 }
 
 .date-icon {
@@ -112,17 +114,20 @@
 }
 
 .date-item:hover {
-  background: var(--parchment-light);
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateX(4px);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-left-color: var(--accent-cta);
+}
+
+.date-item:active {
+  background: var(--bg-tertiary);
 }
 
 .date-item.active {
-  background: rgba(139, 105, 20, 0.12);
-  border-color: var(--accent);
-  color: var(--accent);
-  font-weight: 500;
+  background: transparent;
+  color: var(--text-primary);
+  font-weight: 400;
+  border-left-color: var(--accent-cta);
 }
 
 .date-item.active .date-icon {
@@ -133,7 +138,6 @@
   text-align: center;
   padding: 2rem;
   color: var(--text-tertiary);
-  font-style: italic;
 }
 
 .summary-main-content {
@@ -163,10 +167,9 @@
 }
 
 .toc-sidebar .sidebar-header h3 {
-  font-size: 1.1rem;
-  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 500;
   color: var(--text-primary);
-  font-style: italic;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -180,21 +183,24 @@
 
 .toc-item {
   width: 100%;
-  padding: 0.75rem 1rem;
-  background: var(--parchment-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border: none;
+  border-left: 2px solid transparent;
+  border-radius: 0;
   text-align: left;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   font-family: inherit;
   font-size: 0.9rem;
   color: var(--text-secondary);
   font-weight: 400;
-  border-left: 3px solid transparent;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  box-shadow: none;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.02em;
 }
 
 .toc-item.level-1 {
@@ -215,23 +221,22 @@
 }
 
 .toc-item:hover {
-  background: var(--parchment-light);
-  border-left-color: var(--accent);
-  color: var(--accent);
-  transform: translateX(2px);
+  background: var(--bg-tertiary);
+  border-left-color: var(--accent-cta);
+  color: var(--text-primary);
+}
+
+.toc-item:active {
+  background: var(--bg-tertiary);
 }
 
 .summary-main-content .card {
-  background: var(--parchment-light);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 2.5rem;
+  border-radius: 0;
+  padding: 4rem 3rem;
   margin: 0;
-  box-shadow: var(--shadow-sm);
-  background-image: 
-    linear-gradient(90deg, rgba(139, 105, 20, 0.01) 50%, transparent 50%),
-    linear-gradient(rgba(139, 105, 20, 0.01) 50%, transparent 50%);
-  background-size: 25px 25px;
+  box-shadow: var(--minimal-shadow);
 }
 
 .summary-header {
@@ -250,24 +255,29 @@
 }
 
 .toc-toggle-btn {
-  background: var(--parchment-bg);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 0;
   padding: 0.75rem 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1.2rem;
+  transition: all 0.2s ease;
+  font-size: 1rem;
   color: var(--text-secondary);
   flex-shrink: 0;
-  box-shadow: var(--shadow-sm);
   line-height: 1;
+  font-weight: 400;
+  box-shadow: var(--minimal-shadow);
 }
 
 .toc-toggle-btn:hover {
-  background: var(--parchment-dark);
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: scale(1.05);
+  background: var(--bg-secondary);
+  border-color: var(--accent-cta);
+  color: var(--accent-cta);
+  box-shadow: var(--minimal-shadow-hover);
+}
+
+.toc-toggle-btn:active {
+  box-shadow: var(--minimal-shadow);
 }
 
 .back-link {
@@ -283,13 +293,12 @@
   padding: 0.75rem 1.25rem;
   border-radius: 6px;
   border: 1px solid transparent;
-  font-style: italic;
 }
 
 .back-link:hover {
-  color: var(--accent-hover);
+  color: var(--text-primary);
   gap: 1rem;
-  background: rgba(139, 105, 20, 0.08);
+  background: var(--bg-secondary);
   border-color: var(--border-color);
 }
 
@@ -311,7 +320,6 @@
   font-size: 2.25rem;
   font-weight: 400;
   letter-spacing: 0.05em;
-  font-style: italic;
 }
 
 .summary-content h2 {
@@ -321,7 +329,6 @@
   font-size: 1.75rem;
   font-weight: 400;
   letter-spacing: 0.03em;
-  font-style: italic;
   padding-bottom: 0.75rem;
   border-bottom: 1px dotted var(--border-color);
 }
@@ -332,7 +339,6 @@
   margin-bottom: 1rem;
   font-size: 1.35rem;
   font-weight: 400;
-  font-style: italic;
 }
 
 .summary-content p {
@@ -353,23 +359,25 @@
 }
 
 .summary-content code {
-  background: rgba(139, 105, 20, 0.12);
+  background: var(--bg-tertiary);
   padding: 0.25rem 0.6rem;
   border-radius: 4px;
   font-size: 0.9em;
   color: var(--accent);
   border: 1px solid var(--border-color);
-  font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
+  font-family: 'SF Mono', 'Monaco', 'Consolas', 'Courier New', monospace;
+  box-shadow: var(--minimal-shadow);
+  font-weight: 400;
 }
 
 .summary-content pre {
-  background: var(--parchment-dark);
-  padding: 1.5rem;
-  border-radius: 8px;
+  background: var(--bg-tertiary);
+  padding: 2rem;
+  border-radius: 0;
   overflow-x: auto;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--minimal-shadow);
 }
 
 .summary-content pre code {
@@ -380,18 +388,16 @@
 }
 
 .summary-content blockquote {
-  border-left: 3px solid var(--accent);
-  padding-left: 1.5rem;
+  border-left: 2px solid var(--accent-cta);
+  padding-left: 2rem;
   margin-left: 0;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   color: var(--text-secondary);
-  font-style: italic;
-  background: rgba(139, 105, 20, 0.05);
-  padding: 1.25rem 1.5rem;
-  border-radius: 0 8px 8px 0;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-  border-right: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+  padding: 2rem 2.5rem;
+  border-radius: 0;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--minimal-shadow);
 }
 
 @media (max-width: 1024px) {
