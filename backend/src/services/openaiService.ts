@@ -32,11 +32,8 @@ export class OpenAIService {
     }
 
     try {
-      // 构建对话上下文
-      const dialogueText = dialogues.map(d => {
-        const time = new Date(d.timestamp).toLocaleTimeString('zh-CN');
-        return `[${time}] ${d.role === 'user' ? '用户' : 'AI'}: ${d.content}`;
-      }).join('\n\n');
+      // 构建对话上下文（不包含时间和用户信息）
+      const dialogueText = dialogues.map(d => d.content).join('\n\n');
 
       // 提取知识点
       const knowledgePoints = await this.extractKnowledgePoints(dialogues);
@@ -60,18 +57,19 @@ ${dialogueText}
 - AI回复: ${dialogues.filter(d => d.role === 'assistant').length}
 
 ## 🎯 主要话题
-列出今天讨论的主要话题和问题
+列出今天讨论的主要话题和问题（只列出话题内容，不需要时间戳和用户标识）
 
 ## 💡 知识点总结
 ${knowledgePoints.map(kp => `### ${kp.title}\n${kp.content}`).join('\n\n')}
 
-## 📝 详细对话记录
-按时间顺序列出重要对话
-
 ## 🔍 关键洞察
 总结今天对话中的关键洞察和建议
 
-请用中文生成，格式要清晰易读。`;
+**重要要求：**
+- 不要包含任何时间信息
+- 不要包含"用户"、"AI"等角色标识
+- 只关注内容本身，以知识点的形式呈现
+- 用中文生成，格式要清晰易读`;
 
       const model = process.env.AI_MODEL || 'gpt-4';
       const completion = await this.client.chat.completions.create({
@@ -168,6 +166,12 @@ ${dialogueText}
     const userMessages = dialogues.filter(d => d.role === 'user');
     const aiMessages = dialogues.filter(d => d.role === 'assistant');
 
+    // 提取主要话题（从用户消息中）
+    const topics = userMessages.map(m => m.content).join('\n\n');
+
+    // 提取知识点（从AI回复中）
+    const knowledgePoints = aiMessages.map(m => m.content).join('\n\n');
+
     return `# ${date} 对话总结
 
 ## 📊 概览
@@ -176,19 +180,16 @@ ${dialogueText}
 - AI回复: ${aiMessages.length}
 
 ## 🎯 主要话题
-基于对话内容分析的主要话题
+
+${topics}
 
 ## 💡 知识点总结
-从对话中提取的重要知识点
 
-## 📝 详细对话记录
-${dialogues.map(d => {
-  const time = new Date(d.timestamp).toLocaleTimeString('zh-CN');
-  return `### [${time}] ${d.role === 'user' ? '用户' : 'AI'}\n${d.content}`;
-}).join('\n\n')}
+${knowledgePoints}
 
 ## 🔍 关键洞察
-总结今天对话中的关键洞察
+
+基于今天的对话内容，主要关注了以下技术主题和学习要点。这些对话涵盖了前端开发、性能优化和编程基础等重要内容。
 
 ---
 *注: 这是模拟总结，请设置 OPENAI_API_KEY 环境变量以启用AI分析功能*

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1769151458662-zsi2eicw9",
+    "timestamp": "2026-01-23T06:57:38.662Z",
+    "role": "user",
+    "content": "如何优化React应用的性能？",
+    "workspace": "/Users/test/project",
+    "repository": "my-project"
+  },
+  {
+    "id": "1769151458867-1c0y0hyds",
+    "timestamp": "2026-01-23T06:57:38.867Z",
+    "role": "assistant",
+    "content": "优化React应用性能的几种方法：\n\n1. **使用React.memo**: 防止不必要的重新渲染\n2. **使用useMemo和useCallback**: 缓存计算结果和函数\n3. **代码分割**: 使用React.lazy和Suspense\n4. **虚拟化长列表**: 使用react-window或react-virtualized\n5. **优化状态管理**: 避免不必要的状态更新",
+    "workspace": "/Users/test/project",
+    "repository": "my-project"
+  },
+  {
+    "id": "1769151459069-jbbkvbymz",
+    "timestamp": "2026-01-23T06:57:39.069Z",
+    "role": "user",
+    "content": "TypeScript中的泛型是什么？",
+    "workspace": "/Users/test/project",
+    "repository": "my-project"
+  },
+  {
+    "id": "1769151459271-gcns93up2",
+    "timestamp": "2026-01-23T06:57:39.271Z",
+    "role": "assistant",
+    "content": "TypeScript中的泛型（Generics）是一种创建可重用组件的工具，它允许你创建可以处理多种数据类型的组件，而不是单一的数据类型。\n\n基本语法：\n```typescript\nfunction identity<T>(arg: T): T {\n  return arg;\n}\n```\n\n这里的 `<T>` 是类型变量，可以在函数中使用。",
+    "workspace": "/Users/test/project",
+    "repository": "my-project"
+  },
+  {
+    "id": "1769151459474-avwuentov",
+    "timestamp": "2026-01-23T06:57:39.474Z",
+    "role": "user",
+    "content": "如何创建一个React组件？",
+    "workspace": "/Users/test/project",
+    "repository": "my-project"
+  },
+  {
+    "id": "1769151459676-i28wtvug8",
+    "timestamp": "2026-01-23T06:57:39.676Z",
+    "role": "assistant",
+    "content": "要创建一个React组件，你可以使用函数式组件或类组件。函数式组件是推荐的方式：\n\n```jsx\nfunction MyComponent() {\n  return <div>Hello World</div>;\n}\n```\n\n或者使用箭头函数：\n\n```jsx\nconst MyComponent = () => {\n  return <div>Hello World</div>;\n};\n```",
+    "workspace": "/Users/test/project",
+    "repository": "my-project"
+  }
+]

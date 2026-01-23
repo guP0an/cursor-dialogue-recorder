@@ -55,17 +55,6 @@ OPENAI_API_KEY=your_openai_api_key_here
 PORT=3001
 ```
 
-**使用火山引擎或其他兼容服务：**
-```env
-# 火山引擎配置示例
-AI_API_KEY=db0c94c8-0d7a-4ad0-855d-93b9b7d01bc4
-AI_BASE_URL=https://ark.cn-beijing.volces.com/api/v3
-AI_MODEL=你的模型名称  # 可选，不填默认使用 gpt-4
-
-# 后端服务端口（可选，默认3001）
-PORT=3001
-```
-
 **关于 AI_MODEL：**
 - `AI_MODEL` 是指定使用哪个 AI 模型的参数
 - **可以不填**，系统默认使用 `gpt-4`
