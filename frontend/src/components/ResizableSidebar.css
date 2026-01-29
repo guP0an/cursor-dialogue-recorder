@@ -1,12 +1,43 @@
 .resizable-sidebar {
   position: relative;
   flex-shrink: 0;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
   overflow: hidden;
-  transition: width 0.2s ease;
-  box-shadow: var(--minimal-shadow);
+  transition: width 0.3s ease;
+  box-shadow: none;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.12) 0%, 
+    rgba(255, 255, 255, 0.06) 100%);
+}
+
+[data-theme="dark"] .resizable-sidebar {
+  background: linear-gradient(135deg, 
+    rgba(30, 42, 58, 0.7) 0%, 
+    rgba(26, 35, 50, 0.5) 100%);
+}
+
+.resizable-sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+  padding: 1px;
+  background: linear-gradient(135deg, 
+    rgba(236, 72, 153, 0.15) 0%, 
+    rgba(236, 72, 153, 0.08) 50%,
+    transparent 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 .sidebar-content {
@@ -48,14 +79,14 @@
   right: 1rem;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: 0;
+  border-radius: var(--radius-md);
   padding: 0.5rem 0.75rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-size: 1rem;
   color: var(--text-secondary);
   z-index: 20;
-  font-weight: 400;
+  font-weight: 500;
   box-shadow: var(--minimal-shadow);
   line-height: 1;
 }

@@ -9,6 +9,8 @@ export interface DialogueMessage {
   content: string;
   workspace?: string;
   repository?: string;
+  conversation_id?: string;
+  generation_id?: string;
 }
 
 export class DialogueRecorder extends EventEmitter {
@@ -62,7 +64,14 @@ export class DialogueRecorder extends EventEmitter {
   /**
    * 手动添加对话（用于测试或通过API）
    */
-  public addDialogue(role: 'user' | 'assistant', content: string, workspace?: string, repository?: string): void {
+  public addDialogue(
+    role: 'user' | 'assistant',
+    content: string,
+    workspace?: string,
+    repository?: string,
+    conversation_id?: string,
+    generation_id?: string
+  ): void {
     const message: DialogueMessage = {
       id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       timestamp: new Date().toISOString(),
@@ -70,6 +79,8 @@ export class DialogueRecorder extends EventEmitter {
       content,
       workspace,
       repository,
+      conversation_id,
+      generation_id,
     };
     this.recordDialogue(message);
   }
@@ -89,6 +100,65 @@ export class DialogueRecorder extends EventEmitter {
       const dialogueDate = new Date(d.timestamp).toISOString().split('T')[0];
       return dialogueDate === date;
     });
+  }
+
+  /**
+   * 获取指定会话的对话
+   */
+  public getDialoguesByConversation(conversation_id: string): DialogueMessage[] {
+    return this.dialogues.filter(d => d.conversation_id === conversation_id);
+  }
+
+  /**
+   * 获取指定仓库的对话
+   */
+  public getDialoguesByRepository(repository: string): DialogueMessage[] {
+    return this.dialogues.filter(d => d.repository === repository);
+  }
+
+  /**
+   * 获取所有会话列表
+   */
+  public getConversations(): Array<{ id: string; repository?: string; workspace?: string; count: number; lastMessage: string }> {
+    const conversations = new Map<string, { repository?: string; workspace?: string; messages: DialogueMessage[] }>();
+    
+    this.dialogues.forEach(d => {
+      if (d.conversation_id) {
+        if (!conversations.has(d.conversation_id)) {
+          conversations.set(d.conversation_id, {
+            repository: d.repository,
+            workspace: d.workspace,
+            messages: [],
+          });
+        }
+        conversations.get(d.conversation_id)!.messages.push(d);
+      }
+    });
+
+    return Array.from(conversations.entries()).map(([id, data]) => ({
+      id,
+      repository: data.repository,
+      workspace: data.workspace,
+      count: data.messages.length,
+      lastMessage: data.messages[data.messages.length - 1]?.timestamp || '',
+    })).sort((a, b) => b.lastMessage.localeCompare(a.lastMessage));
+  }
+
+  /**
+   * 获取所有仓库列表
+   */
+  public getRepositories(): Array<{ name: string; count: number }> {
+    const repos = new Map<string, number>();
+    
+    this.dialogues.forEach(d => {
+      if (d.repository) {
+        repos.set(d.repository, (repos.get(d.repository) || 0) + 1);
+      }
+    });
+
+    return Array.from(repos.entries())
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => b.count - a.count);
   }
 
   /**

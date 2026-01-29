@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeSubmitPrompt": [
+      {
+        "command": ".cursor/hooks/record-dialogue.sh beforeSubmitPrompt",
+        "timeout": 5
+      }
+    ],
+    "afterAgentResponse": [
+      {
+        "command": ".cursor/hooks/record-dialogue.sh afterAgentResponse",
+        "timeout": 5
+      }
+    ]
+  }
+}

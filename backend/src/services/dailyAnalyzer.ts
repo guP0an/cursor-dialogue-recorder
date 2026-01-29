@@ -22,15 +22,50 @@ export class DailyAnalyzer {
 
   /**
    * 启动每日分析任务
-   * 每天早上8点分析昨天的对话
+   * - 每天早上8点分析昨天的对话
+   * - 启动时自动补跑：为所有「有对话但还没总结」的日期生成总结（如 1.27、1.28）
    */
   public start(): void {
-    // 每天8点执行
+    // 每天 8 点分析昨天
     cron.schedule('0 8 * * *', () => {
       this.analyzeYesterday();
     });
 
+    // 启动时补跑：有对话的日期若没有总结文件，自动生成
+    this.fillMissingSummaries().catch((err) => {
+      console.error('📊 补跑总结失败:', err);
+    });
+
     console.log('📊 每日分析任务已启动，将在每天早上8点分析昨天的对话');
+    console.log('📊 启动时会自动为有对话但未生成总结的日期补跑总结');
+  }
+
+  /**
+   * 补跑缺失的总结：遍历所有有对话的日期，若该日期没有总结文件则生成
+   */
+  public async fillMissingSummaries(): Promise<void> {
+    const stats = this.dialogueRecorder.getStats();
+    const datesWithDialogues = Object.keys(stats.byDate).sort();
+
+    if (datesWithDialogues.length === 0) {
+      return;
+    }
+
+    const missing: string[] = [];
+    for (const dateStr of datesWithDialogues) {
+      if (!this.getSummary(dateStr)) {
+        missing.push(dateStr);
+      }
+    }
+
+    if (missing.length === 0) {
+      return;
+    }
+
+    console.log(`📊 补跑总结：以下 ${missing.length} 个日期有对话但无总结，开始生成：${missing.join(', ')}`);
+    for (const dateStr of missing) {
+      await this.analyzeDate(dateStr);
+    }
   }
 
   /**
@@ -69,12 +104,13 @@ export class DailyAnalyzer {
   }
 
   /**
-   * 获取所有总结文件列表
+   * 获取所有总结文件列表（仅日期格式 YYYY-MM-DD.md）
    */
   public getSummaryFiles(): string[] {
     try {
+      const datePattern = /^\d{4}-\d{2}-\d{2}\.md$/;
       return fs.readdirSync(this.summariesDir)
-        .filter(file => file.endsWith('.md'))
+        .filter(file => datePattern.test(file))
         .sort()
         .reverse();
     } catch (error) {

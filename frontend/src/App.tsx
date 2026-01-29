@@ -4,6 +4,7 @@ import DialogueList from './components/DialogueList';
 import SummaryView from './components/SummaryView';
 import Stats from './components/Stats';
 import { ResizableSidebar } from './components/ResizableSidebar';
+import { ThemeToggle } from './components/ThemeToggle';
 
 function NavLink({ to, children }: { to: string; children: React.ReactNode }) {
   const location = useLocation();
@@ -47,6 +48,7 @@ function App() {
                 <span className="nav-text">统计信息</span>
               </NavLink>
             </nav>
+            <ThemeToggle />
           </div>
         </ResizableSidebar>
         <main className="app-main">
